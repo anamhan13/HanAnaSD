@@ -14,7 +14,6 @@ public class User {
     private String username;
     private String password;
     private String name;
-    private Date birthday;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -33,11 +32,10 @@ public class User {
 
     public User() {}
 
-    public User(String username, String password, String name, Date birthday, Role role) {
+    public User(String username, String password, String name, Role role) {
         this.username = username;
         this.password = password;
         this.name = name;
-        this.birthday = birthday;
         this.role = role;
     }
 
@@ -71,14 +69,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
     }
 
     public Role getRole() {

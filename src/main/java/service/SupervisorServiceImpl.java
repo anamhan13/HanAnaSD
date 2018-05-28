@@ -18,19 +18,13 @@ import repository.UserRepository;
 public class SupervisorServiceImpl implements SupervisorService {
 
     private UserRepository userRepository;
-    private SupervisorRepository supervisorRepository;
     private CaseRepository caseRepository;
-    private UserConverter userConverter;
-    private PersonConverter personConverter;
     private CaseService caseService;
 
     @Autowired
-    public SupervisorServiceImpl(UserRepository userRepository, SupervisorRepository supervisorRepository, CaseRepository caseRepository, UserConverter userConverter, PersonConverter personConverter, CaseService caseService) {
+    public SupervisorServiceImpl(UserRepository userRepository, CaseRepository caseRepository, CaseService caseService) {
         this.userRepository = userRepository;
-        this.supervisorRepository = supervisorRepository;
         this.caseRepository = caseRepository;
-        this.userConverter = userConverter;
-        this.personConverter = personConverter;
         this.caseService = caseService;
     }
 
@@ -48,9 +42,22 @@ public class SupervisorServiceImpl implements SupervisorService {
                     .setName(userDto.getName())
                     .setUsername(userDto.getUsername())
                     .setPassword(userDto.getPassword())
-                    .setBirthday(userDto.getBirthday())
-                    .setRole(userDto.getRole())
+                    .setRole(null)
                     .build();
+        switch(userDto.getRole()) {
+            case "ADMIN":
+                user.setRole(Role.ADMIN);
+                break;
+            case "INVESTIGATOR":
+                user.setRole(Role.INVESTIGATOR);
+                break;
+            case "SUPERVISOR":
+                user.setRole(Role.SUPERVISOR);
+                break;
+            default:
+                user.setRole(null);
+                break;
+        }
 
         userRepository.save(user);
 

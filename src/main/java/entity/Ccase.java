@@ -37,6 +37,12 @@ public class Ccase {
 
     public Ccase() {}
 
+    public Ccase(long supervisor, boolean warrantNeeded, String caseStatus) {
+        this.supervisor = supervisor;
+        this.warrantNeeded = warrantNeeded;
+        this.caseStatus = caseStatus;
+    }
+
     public Ccase(long supervisor, boolean warrantNeeded, boolean warrantObtained, String status) {
         this.supervisor = supervisor;
         this.warrantNeeded = warrantNeeded;

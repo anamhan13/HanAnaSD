@@ -9,7 +9,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import repository.UserRepository;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -29,16 +31,35 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto save(UserDto userDto) {
         User user = new User();
-        user.setName(userDto.getName());
-        user.setUsername(userDto.getUsername());
-        //bCryptPasswordEncoder.encode(userDto.getPassword())
-        user.setPassword(userDto.getPassword());
-        user.setBirthday(userDto.getBirthday());
-        user.setRole(userDto.getRole());
+        if (!userDto.getName().trim().isEmpty()) {
+            if (!userDto.getPassword().trim().isEmpty()) {
+                if (!userDto.getRole().trim().isEmpty()) {
+                    user.setName(userDto.getName());
+                    user.setUsername(userDto.getUsername());
+                    //bCryptPasswordEncoder.encode(userDto.getPassword())
+                    user.setPassword(userDto.getPassword());
+                    switch (userDto.getRole()) {
+                        case "ADMIN":
+                            user.setRole(Role.ADMIN);
+                            break;
+                        case "INVESTIGATOR":
+                            user.setRole(Role.INVESTIGATOR);
+                            break;
+                        case "SUPERVISOR":
+                            user.setRole(Role.SUPERVISOR);
+                            break;
+                        default:
+                            user.setRole(null);
+                            break;
+                    }
 
-        userRepository.save(user);
-        userDto.setId(user.getId());
-        return userDto;
+                    userRepository.save(user);
+                    userDto.setId(user.getId());
+                    return userDto;
+                }
+            }
+        }
+        return null;
     }
 
     @Override
@@ -71,13 +92,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto updateInvestigatorRole(UserDto userDto) {
-        if (userDto.getRole().equals(Role.INVESTIGATOR)) {
-            userDto.setRole(Role.SUPERVISOR);
+        if (userDto.getRole().equals("INVESTIGATOR")) {
+            userDto.setRole("SUPERVISOR");
             User user = userRepository.findByUsername(userDto.getUsername());
             user.setRole(Role.SUPERVISOR);
             userRepository.save(user);
             return userDto;
         }
         return null;
+    }
+
+    @Override
+    public List<User> findAll() {
+        List<User> users = userRepository.findAll();
+        return users;
     }
 }

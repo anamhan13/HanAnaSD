@@ -1,6 +1,7 @@
 package converter;
 
 import dto.UserDto;
+import entity.Role;
 import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,10 +18,22 @@ public class UserConverter {
     public User convertToUser(UserDto userDto) {
         User user = new User();
         user.setId(userDto.getId());
-        user.setRole(userDto.getRole());
+        switch(userDto.getRole()) {
+            case "ADMIN":
+                user.setRole(Role.ADMIN);
+                break;
+            case "INVESTIGATOR":
+                user.setRole(Role.INVESTIGATOR);
+                break;
+            case "SUPERVISOR":
+                user.setRole(Role.SUPERVISOR);
+                break;
+            default:
+                user.setRole(null);
+                break;
+        }
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
-        user.setBirthday(userDto.getBirthday());
         user.setName(userDto.getName());
 
         return user;
@@ -38,11 +51,10 @@ public class UserConverter {
     public UserDto convertUser(User user) {
         UserDto userDto = new UserDto();
 
-        userDto.setRole(user.getRole());
+        userDto.setRole(user.getRole().name());
         userDto.setUsername(user.getUsername());
         userDto.setPassword(user.getPassword());
         userDto.setName(user.getName());
-        userDto.setBirthday(user.getBirthday());
         userDto.setId(user.getId());
 
         return userDto;

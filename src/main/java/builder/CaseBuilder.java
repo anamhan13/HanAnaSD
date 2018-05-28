@@ -71,7 +71,7 @@ public class CaseBuilder {
     }
 
     public Ccase build() {
-        return new Ccase(supervisor, persons, warrantNeeded, warrantObtained, status);
+        return new Ccase(supervisor, warrantObtained, warrantNeeded, status);
     }
 
 }

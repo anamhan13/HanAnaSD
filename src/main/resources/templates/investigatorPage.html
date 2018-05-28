@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Investigator</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h2>Investigator page</h2>
+
+<form action="#" th:action="@{/investigatorPage}" th:object="${caseDto}" method="post">
+
+    <p>Case id: <input type="number" th:field="*{id}" /></p>
+
+    <p>Status: <input type="text" th:field="*{status}" /></p>
+
+    <p>Supervisor: <input type="number" th:field="*{supervisor}" /></p>
+
+    <p>Warrant needed: <input type="checkbox" th:field="*{warrantNeeded}" /></p>
+
+    <p>Warrant obtained: <input type="checkbox" th:field="*{warrantObtained}" /></p>
+
+    <p><input type="submit" name="updateCase" value="Update case" /></p>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>Case id</th>
+        <th>Status</th>
+        <th>Supervisor</th>
+        <th>Warrant needed</th>
+        <th>Warrant obtained</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c : ${cases}">
+        <td th:text = "${c.id}"></td>
+        <td th:text = "${c.caseStatus}"></td>
+        <td th:text = "${c.supervisor}"></td>
+        <td th:text = "${c.warrantNeeded}"></td>
+        <td th:text = "${c.warrantObtained}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<p th:text = "${message}" ></p>
+
+</body>
+</html>

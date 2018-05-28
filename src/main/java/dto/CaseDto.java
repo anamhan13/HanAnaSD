@@ -21,10 +21,14 @@ public class CaseDto {
 
     public CaseDto() {}
 
-    public CaseDto(long supervisor, Set<PersonDto> persons, boolean warrantNeeded, boolean warrantObtained, String status) {
+    public CaseDto(long supervisor, boolean warrantNeeded, String status) {
         this.supervisor = supervisor;
-        //his.users = users;
-        //this.persons = persons;
+        this.warrantNeeded = warrantNeeded;
+        this.status = status;
+    }
+
+    public CaseDto(long supervisor, boolean warrantNeeded, boolean warrantObtained, String status) {
+        this.supervisor = supervisor;
         this.warrantNeeded = warrantNeeded;
         this.warrantObtained = warrantObtained;
         this.status = status;

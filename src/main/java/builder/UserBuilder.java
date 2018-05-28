@@ -11,7 +11,6 @@ public class UserBuilder {
     private String username;
     private String password;
     private String name;
-    private Date birthday;
     private Role role;
 
     public UserBuilder() {}
@@ -36,17 +35,12 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder setBirthday(Date birthday) {
-        this.birthday = birthday;
-        return this;
-    }
-
     public UserBuilder setRole(Role role) {
         this.role=role;
         return this;
     }
 
     public User build() {
-        return new User(username, password, name, birthday, role);
+        return new User(username, password, name, role);
     }
 }

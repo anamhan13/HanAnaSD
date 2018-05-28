@@ -1,23 +1,17 @@
 package dto;
 
-import entity.Role;
-
-import java.util.Date;
-
 public class UserDto {
 
     private long id;
     private String username;
     private String password;
     private String name;
-    private Date birthday;
-    private Role role;
+    private String role;
 
-    public UserDto(String username, String password, String name, Date birthday, Role role) {
+    public UserDto(String username, String password, String name, String role) {
         this.username = username;
         this.password = password;
         this.name = name;
-        this.birthday = birthday;
         this.role = role;
     }
 
@@ -55,19 +49,11 @@ public class UserDto {
         this.name = name;
     }
 
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 }

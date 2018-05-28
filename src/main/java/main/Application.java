@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
-@SpringBootApplication(scanBasePackages = {"entity","repository","service","main","dto","builder","converter","controller"})
+@SpringBootApplication(scanBasePackages = {"entity","repository","service","main","dto","builder","converter","controller","config"})
 @EnableJpaRepositories(basePackages = {"repository"})
 @PropertySource(value = "classpath:application.properties")
 @EntityScan(basePackages ={"entity"})
